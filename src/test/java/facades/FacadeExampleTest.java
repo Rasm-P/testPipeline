@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import utils.Settings;
 import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
@@ -27,12 +26,9 @@ public class FacadeExampleTest {
 
     //@BeforeAll
     public static void setUpClass() {
-        emf = EMF_Creator.createEntityManagerFactory(
-                "pu",
-                "jdbc:mysql://localhost:3307/cba_test",
-                "dev",
-                "ax2",
-                EMF_Creator.Strategy.CREATE);
+        //This method must be called before you request the EntityManagerFactory
+        EMF_Creator.startREST_TestWithDB();
+        emf = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.TEST, EMF_Creator.Strategy.CREATE);
         facade = FacadeExample.getFacadeExample(emf);
     }
 
