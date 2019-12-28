@@ -28,8 +28,7 @@ public class RenameMeResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    //Read this line from a settings-file  since used several places
-    private static final String TEST_DB = "jdbc:mysql://localhost:3307/cba_test";
+    private static RenameMe r1, r2;
 
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -42,25 +41,22 @@ public class RenameMeResourceTest {
 
     @BeforeAll
     public static void setUpClass() {
-        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST, Strategy.CREATE);
+        //This method must be called before you request the EntityManagerFactory
+        EMF_Creator.startREST_TestWithDB();
+        emf = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.TEST, EMF_Creator.Strategy.CREATE);
 
-        //NOT Required if you use the version of EMF_Creator.createEntityManagerFactory used above        
-        //System.setProperty("IS_TEST", TEST_DB);
-        //We are using the database on the virtual Vagrant image, so username password are the same for all dev-databases
-        
         httpServer = startServer();
-        
         //Setup RestAssured
         RestAssured.baseURI = SERVER_URL;
         RestAssured.port = SERVER_PORT;
-   
         RestAssured.defaultParser = Parser.JSON;
     }
-    
+
     @AfterAll
-    public static void closeTestServer(){
-        //System.in.read();
-         httpServer.shutdownNow();
+    public static void closeTestServer() {
+        //Don't forget this, if you called its counterpart in @BeforeAll
+        EMF_Creator.endREST_TestWithDB();
+        httpServer.shutdownNow();
     }
     
     // Setup the DataBase (used by the test-server and this test) in a known state BEFORE EACH TEST
