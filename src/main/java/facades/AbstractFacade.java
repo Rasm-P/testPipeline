@@ -4,11 +4,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
 
-/**
- *
- * @author Henning
- * @param <T>
- */
 public abstract class AbstractFacade<T> {
 
     private final Class<T> ENTITY_CLASS;

@@ -1,8 +1,10 @@
 
 package security;
+
 import java.security.Principal;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.SecurityContext;
+
 public class JWTSecurityContext implements SecurityContext {
    UserPrincipal user;
    ContainerRequestContext request;
