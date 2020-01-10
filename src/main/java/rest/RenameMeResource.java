@@ -14,12 +14,7 @@ import javax.ws.rs.core.MediaType;
 @Path("xxx")
 public class RenameMeResource {
 
-    private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
-                "pu",
-                "jdbc:mysql://localhost:3307/cba",
-                "dev",
-                "ax2",
-                EMF_Creator.Strategy.CREATE);
+    private static EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
     private static final FacadeExample FACADE =  FacadeExample.getFacadeExample(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
             
