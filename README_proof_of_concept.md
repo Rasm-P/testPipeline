@@ -9,9 +9,9 @@
 - Click the green Activate button, and select the the new repository to be used with Travis CI
 
 - Create two local databases (on your vagrant image) named exactly (exactly is only for this proof of concept) as below:
-  - `cba`
-  - `cba_test`
-- Create a REMOTE database on your Droplet named exacly like this: `cba`
+  - `testPipeline`
+  - `testPipeline_test`
+- Create a REMOTE database on your Droplet named exacly like this: `testPipeline`
 - in a terminal (git bash for Windows Users) in the root of the project type: `mvn test`
 - Hopefully the previous step was a success, if not, fix the problem(s)
 
@@ -27,7 +27,7 @@
 
 `export PW="YOUR_DB_PASSWORD"`
 
-`export CONNECTION_STR="jdbc:mysql://localhost:3306/cba"
+`export CONNECTION_STR="jdbc:mysql://localhost:3306/testPipeline"
 `
 - Save the file, and restart Tomcat `sudo systemcctl restart tomcat`
 - Back in a LOCAL terminal (git bash for Windows Users), in the root of the project, type (add your own password):
